@@ -15,6 +15,7 @@ function HomePage(props) {
 export default HomePage;
 
 export async function getStaticProps() {
+  console.log('页面重新构建中...');
   const response = await fetch(
     'https://nextjs-course-bd5d1-default-rtdb.firebaseio.com/events.json'
   );
