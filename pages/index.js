@@ -37,13 +37,13 @@ export async function getStaticProps() {
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
 
-  const datenow = `当前时间：${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+  const datenow = `当前页面构建时间：${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
 
   return {
     props: {
       FeaturedEvents,
       datenow,
     },
-    revalidate: 60,
+    revalidate: 1,
   };
 }
