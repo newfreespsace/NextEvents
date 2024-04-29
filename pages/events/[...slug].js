@@ -51,6 +51,9 @@ function FilteredEventsPage(props) {
   }
 
   // const filteredEvents = getFilteredEvents({ year: numYear, month: numMonth });
+  if (!data) {
+    return <h1>Loading....</h1>;
+  }
   const filteredEvents = data.filter((event) => {
     const eventDate = new Date(event.date);
     return (
