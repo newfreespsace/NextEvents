@@ -1,12 +1,21 @@
 import { useRouter } from 'next/router';
 
-import { getFilteredEvents } from '@/dummy-data';
 import EventList from '@/components/events/event-list';
 import ResultsTitle from '@/components/events/result-title';
 import Button from '@/components/ui/button';
 import ErrorAlert from '@/components/ui/error-alert';
 
-function FilteredEventsPage() {
+async function getData() {
+  const response = await fetch(
+    'https://nextjs-course-bd5d1-default-rtdb.firebaseio.com/events.json'
+  );
+  const data = await response.json();
+  return data;
+}
+
+function FilteredEventsPage(props) {
+  const { data } = props;
+
   const router = useRouter();
 
   const filterData = router.query.slug;
@@ -41,7 +50,14 @@ function FilteredEventsPage() {
     );
   }
 
-  const filteredEvents = getFilteredEvents({ year: numYear, month: numMonth });
+  // const filteredEvents = getFilteredEvents({ year: numYear, month: numMonth });
+  const filteredEvents = data.filter((event) => {
+    const eventDate = new Date(event.date);
+    return (
+      eventDate.getFullYear() === numYear &&
+      eventDate.getMonth() === numMonth - 1
+    );
+  });
 
   console.log(filteredEvents);
 
@@ -69,3 +85,18 @@ function FilteredEventsPage() {
 }
 
 export default FilteredEventsPage;
+
+export async function getServerSideProps() {
+  const data = await getData();
+
+  const AllEvents = [];
+  for (let key in data) {
+    AllEvents.push({ ...data[key], id: key });
+  }
+
+  return {
+    props: {
+      AllEvents,
+    },
+  };
+}

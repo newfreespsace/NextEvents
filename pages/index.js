@@ -32,11 +32,11 @@ export async function getStaticProps() {
 
   // 获取当前的年份、月份、日期、小时、分钟、秒钟
   const year = now.getFullYear();
-  const month = now.getMonth() + 1; // 月份是从 0 开始计数的，所以要加 1
-  const date = now.getDate();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 月份是从 0 开始计数的，所以要加 1
+  const date = now.getDate().toString().padStart(2, '0');
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
 
   const datenow = `当前页面构建时间：${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
 
@@ -45,6 +45,6 @@ export async function getStaticProps() {
       FeaturedEvents,
       datenow,
     },
-    revalidate: 1,
+    revalidate: 60 * 60,
   };
 }

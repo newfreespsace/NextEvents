@@ -3,6 +3,7 @@ import DateIcon from '../icons/date-icon';
 import AddressIcon from '../icons/address-icon';
 import ArrowRightIcon from '../icons/arrow-right-icon';
 import classes from './event-item.module.css';
+import Image from 'next/image';
 
 function EventItem({ title, image, date, location, id }) {
   console.log(title);
