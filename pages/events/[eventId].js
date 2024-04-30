@@ -10,9 +10,9 @@ function EventDetailPage(props) {
 
   if (!event)
     return (
-      <ErrorAlert>
-        <p>there is no event!</p>
-      </ErrorAlert>
+      <div className="center">
+        <p>Loading...</p>
+      </div>
     );
 
   return (
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
     /*
     fallback: blocking （首选）
         当请求到一个尚未生成的页面时，Next.js将在第一次请求中对该页面进行服务器渲染。
