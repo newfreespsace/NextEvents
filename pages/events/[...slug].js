@@ -41,7 +41,7 @@ function FilteredEventsPage(props) {
     return (
       <>
         <ErrorAlert>
-          <p>Invalid filter. Please adjust your values!</p>
+          <p>Invalid filter. Please adjust your values!!!!</p>
         </ErrorAlert>
         <div className="center">
           <Button link="/events">Show All Events</Button>
